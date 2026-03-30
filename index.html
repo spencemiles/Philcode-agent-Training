@@ -1343,7 +1343,7 @@ You'll be in good hands. When would be a good time for them to call you?"
     </div>
     
     <button class="btn btn-primary" id="calculateBtn">
-        <i class="fas fa-calculator"></i> Calculate Earnings
+        Calculate Earnings
     </button>
     
     <div class="calc-result" id="calcResult">
@@ -1354,53 +1354,70 @@ You'll be in good hands. When would be a good time for them to call you?"
 </div>
 
 <script>
-// Commission Calculator
+// Commission Calculator - 30% Fixed Rate
 function calculateCommission() {
-    const projectValue = parseInt(document.getElementById('projectValue').value) || 50000;
-    const commissionRate = 30; // Fixed at 30%
-    const clientsPerMonth = parseInt(document.getElementById('clientsPerMonth').value) || 4;
+    // Get values
+    let projectValue = document.getElementById('projectValue');
+    let clientsPerMonth = document.getElementById('clientsPerMonth');
     
-    const perClient = (projectValue * commissionRate) / 100;
-    const monthlyEarnings = perClient * clientsPerMonth;
-    const yearlyEarnings = monthlyEarnings * 12;
+    let project = parseInt(projectValue.value) || 50000;
+    let clients = parseInt(clientsPerMonth.value) || 4;
     
-    document.getElementById('perClient').textContent = 'KSh ' + perClient.toLocaleString();
-    document.getElementById('monthlyEarnings').textContent = 'KSh ' + monthlyEarnings.toLocaleString();
-    document.getElementById('yearlyEarnings').textContent = 'KSh ' + yearlyEarnings.toLocaleString();
+    // FIXED 30% COMMISSION
+    let commissionRate = 30;
     
+    // Calculate earnings
+    let perClient = (project * commissionRate) / 100;
+    let monthly = perClient * clients;
+    let yearly = monthly * 12;
+    
+    // Update display
+    document.getElementById('perClient').innerHTML = 'KSh ' + perClient.toLocaleString();
+    document.getElementById('monthlyEarnings').innerHTML = 'KSh ' + monthly.toLocaleString();
+    document.getElementById('yearlyEarnings').innerHTML = 'KSh ' + yearly.toLocaleString();
+    
+    // Make result visible
     document.getElementById('calcResult').style.display = 'block';
-    
-    // Animate the result
-    const resultDiv = document.getElementById('calcResult');
-    resultDiv.style.animation = 'none';
-    setTimeout(() => {
-        resultDiv.style.animation = 'fadeIn 0.6s ease';
-    }, 10);
 }
 
-// Initialize calculator when page loads
-document.addEventListener('DOMContentLoaded', function() {
-    // Set up calculate button
-    const calculateBtn = document.getElementById('calculateBtn');
-    if (calculateBtn) {
-        calculateBtn.addEventListener('click', calculateCommission);
+// Set up event listeners when page loads
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+        setupCalculator();
+    });
+} else {
+    setupCalculator();
+}
+
+function setupCalculator() {
+    // Get elements
+    let calcBtn = document.getElementById('calculateBtn');
+    let projectInput = document.getElementById('projectValue');
+    let clientsInput = document.getElementById('clientsPerMonth');
+    let rateInput = document.getElementById('commissionRate');
+    
+    // Force commission rate to 30 and make it readonly
+    if (rateInput) {
+        rateInput.value = 30;
+        rateInput.readOnly = true;
     }
     
-    // Set up input listeners for real-time calculation
-    const projectValueInput = document.getElementById('projectValue');
-    const clientsPerMonthInput = document.getElementById('clientsPerMonth');
-    
-    if (projectValueInput) {
-        projectValueInput.addEventListener('input', calculateCommission);
+    // Add event listeners
+    if (calcBtn) {
+        calcBtn.addEventListener('click', calculateCommission);
     }
     
-    if (clientsPerMonthInput) {
-        clientsPerMonthInput.addEventListener('input', calculateCommission);
+    if (projectInput) {
+        projectInput.addEventListener('input', calculateCommission);
     }
     
-    // Calculate on page load
+    if (clientsInput) {
+        clientsInput.addEventListener('input', calculateCommission);
+    }
+    
+    // Calculate on load
     calculateCommission();
-});
+}
 </script>
         
         <!-- Chapter 8: Daily Routine -->
