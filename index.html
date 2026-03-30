@@ -1320,7 +1320,7 @@ You'll be in good hands. When would be a good time for them to call you?"
             </div>
         </div>
         
-   <!-- Commission Calculator -->
+<!-- Commission Calculator -->
 <div class="calculator fade-in" id="calculator">
     <h3>COMMISSION CALCULATOR</h3>
     <p>Know exactly how much you'll earn from each client.</p>
@@ -1332,8 +1332,8 @@ You'll be in good hands. When would be a good time for them to call you?"
         </div>
         
         <div class="calc-input">
-            <label for="commissionRate">Commission Rate <span style="color: #e74c3c; font-size: 0.9em;">(Fixed at 20%)</span></label>
-            <input type="number" id="commissionRate" value="20" readonly style="background-color: #f0f0f0; cursor: not-allowed;">
+            <label for="commissionRate">Commission Rate <span style="color: #e74c3c; font-size: 0.9em;">(Fixed at 30%)</span></label>
+            <input type="number" id="commissionRate" value="30" readonly style="background-color: #f0f0f0; cursor: not-allowed;">
         </div>
         
         <div class="calc-input">
@@ -1357,7 +1357,7 @@ You'll be in good hands. When would be a good time for them to call you?"
 // Commission Calculator
 function calculateCommission() {
     const projectValue = parseInt(document.getElementById('projectValue').value) || 50000;
-    const commissionRate = 20; // Fixed at 20%
+    const commissionRate = 30; // Fixed at 30%
     const clientsPerMonth = parseInt(document.getElementById('clientsPerMonth').value) || 4;
     
     const perClient = (projectValue * commissionRate) / 100;
